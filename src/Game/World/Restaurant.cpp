@@ -15,6 +15,7 @@ Restaurant::Restaurant() {
     this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager);    
     initItems();
     initCounters();
+    initDecoration();
     initClients();
     generateClient();
 
@@ -36,6 +37,7 @@ void Restaurant::initItems(){
     burger = new Item(burgerImg, "patty");
     botBread = new Item(botBreadImg, "bottomBun");
     topBread = new Item(topBreadImg, "topBun");
+
 }
 void Restaurant::initCounters(){
     int counterWidth = 96;
@@ -57,8 +59,33 @@ void Restaurant::initCounters(){
     entityManager->addEntity(new BaseCounter(counterWidth*5, yOffset -10, counterWidth, 113, tomato, tomatoCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth*6, yOffset-32, counterWidth, 133, botBread, breadCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth*7, yOffset-32, counterWidth, 133, topBread, breadCounterImg));
-
 }
+void Restaurant::initDecoration(){
+    ofImage DecorationSheet, tableImg, seatImg;
+    DecorationSheet.load("images/sprite.png");
+    tableImg.cropFrom(DecorationSheet, 0, 0, 100, 100);
+    seatImg.cropFrom(DecorationSheet, 107, 13, 34, 37);
+    Table *table1 = new Table(130, 40, 96, 117, 5, seatImg,tableImg);
+    Table *table2 = new Table(380, 40, 96, 117, 4, seatImg,tableImg);
+    Table *table3 = new Table(600, 40, 96, 117, 3, seatImg,tableImg);
+    Table *table4 = new Table(130, 200, 96, 117, 6, seatImg,tableImg);
+    Table *table5 = new Table(380, 200, 96, 117, 2, seatImg,tableImg);
+    entityManager->addEntity(table1);
+    entityManager->addEntity(table2);
+    entityManager->addEntity(table3);
+    entityManager->addEntity(table4);
+    entityManager->addEntity(table5);
+
+    // entityManager->addEntity(new Entity(190, 220, 50, 50, seatImg));    
+    // entityManager->addEntity(new Entity(150, 280, 50, 50, seatImg));    
+    // entityManager->addEntity(new Entity(190, 280, 50, 50, seatImg));    
+    //     entityManager->addEntity(new Entity(130, 200, 96, 117, tableImg));
+    // entityManager->addEntity(new Entity(380, 40, 96, 117, tableImg));
+    // entityManager->addEntity(new Entity(380, 200, 96, 117, tableImg));
+    // entityManager->addEntity(new Entity(600, 40, 96, 117, tableImg));
+    // entityManager->addEntity(new Entity(600, 200, 96, 117, tableImg));
+}
+
 void Restaurant::initClients(){
     ofImage temp;
     temp.load("images/People/Car_Designer3Female.png");
