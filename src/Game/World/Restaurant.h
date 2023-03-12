@@ -7,6 +7,8 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "ofMain.h"
+#include "Table.h"
+
 
 class Restaurant {
     private:
@@ -29,6 +31,7 @@ class Restaurant {
         ofImage floor;
         void initItems();
         void initCounters();
+        void initDecoration();
         void initClients();
         void generateClient();
         void serveClient();
