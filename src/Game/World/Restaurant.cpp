@@ -1,6 +1,4 @@
-//
-// Created by joshu on 11/3/2020.
-//
+
 
 #include "Restaurant.h"
 
@@ -123,6 +121,7 @@ void Restaurant::render() {
     entityManager->render();
     ofSetColor(0, 100, 0);
     ofDrawBitmapString("Money: " + to_string(money), ofGetWidth()/2, 10);
+    //ofDrawBitmapString("Lives: " + to_string(lives), ofGetWidth()/2, 30);)
     ofSetColor(256, 256, 256);
 }
 void Restaurant::serveClient(){
@@ -138,7 +137,15 @@ void Restaurant::serveClient(){
 }
 void Restaurant::keyPressed(int key) {
     player->keyPressed(key);
-    if(key == 's'){
-        serveClient();
+    switch(key){
+        case 's':
+            serveClient();
+            break;
+     /*    case OF_KEY_LEFT:
+            player->moveLeft();
+            break;
+        case OF_KEY_RIGHT:
+            player->moveRight();
+            break; */
     }
 }

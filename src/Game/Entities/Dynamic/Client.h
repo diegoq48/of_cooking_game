@@ -5,7 +5,7 @@ class Client: public Entity{
     private:
         Burger* burger;
         int originalPatience;
-        int patience=2000;
+        int patience = 3600;
     public:
         Client(int, int, int, int, ofImage, Burger*);
         virtual ~Client();

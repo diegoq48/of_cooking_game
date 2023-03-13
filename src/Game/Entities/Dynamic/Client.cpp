@@ -8,8 +8,10 @@ Client::~Client(){
 }
 void Client::render(){
     burger->render();
-    ofSetColor (255,255,255);
+    float patiencePercentage = (patience)/3600;
+    ofSetColor (255,patience/10 ,patience/10);
     sprite.draw(x, y, width, height);
+    ofSetColor (255,255,255);
     if(nextClient != nullptr){
         nextClient->render();
     }
