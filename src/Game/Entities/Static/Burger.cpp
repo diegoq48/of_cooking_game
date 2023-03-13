@@ -26,3 +26,28 @@ void Burger::render(){
 void Burger::clear(){
     ingredients.empty();
 }
+
+// The function should should not care by the order of the ingredients except for the buns at the start and end
+bool Burger::equals(Burger *burger) {
+// check if the first element in ingredients is a bun
+    if (ingredients[0]->name != "bottomBun"){
+        return false;
+    }
+    if (ingredients[ingredients.size()-1]->name != "topBun"){
+        return false;
+    }
+// check if all the ingredients in the burger are in the other burger
+    for (Item* ingredient:ingredients){
+        bool found = false;
+        for (Item* otherIngredient:burger->ingredients){
+            if (ingredient->name == otherIngredient->name){
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            return false;
+        }
+    }
+    return true;
+}
