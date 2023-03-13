@@ -15,8 +15,8 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
     chefAnimframes.push_back(temp);
     this->chefAnim = new Animation(50, chefAnimframes);
     this->entityManager = em;
-    
 }
+
 void Player::tick(){
     chefAnim->tick();
     if(facing == "left"){
@@ -46,14 +46,31 @@ void Player::render(){
 }
 
 void Player::keyPressed(int key){
-    if(key == 'e'){
-        BaseCounter* ac = getActiveCounter();
-        if(ac != nullptr){
-            Item* item = ac->getItem();
-            if(item != nullptr){
-                burger->addIngredient(item);
+    switch(key){
+        case 'e':
+            BaseCounter* ac = getActiveCounter();
+            if(ac != nullptr){
+                Item* item = ac->getItem();
+                if(item != nullptr){
+                    burger->addIngredient(item);
+                }
             }
+            break;
+    }
+    if(key == OF_KEY_LEFT){
+        facing = "left"; 
+        return;
+    }
+    if(key == OF_KEY_RIGHT){
+        facing = "right";
+        return;
+    }
+    if (key == OF_KEY_UP) {
+        if (speed == 0){
+            speed = 5;
+            return;
         }
+        speed = 0;
     }
 }
 BaseCounter* Player::getActiveCounter(){
