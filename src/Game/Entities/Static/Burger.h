@@ -20,4 +20,8 @@ class Burger {
         this->y = y;
     }
     bool equals(Burger *burger);  
+    void removeIngredient();
+    vector<Item *> getIngredients() {
+        return ingredients;
+    }
 };

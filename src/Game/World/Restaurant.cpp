@@ -75,15 +75,6 @@ void Restaurant::initDecoration(){
     entityManager->addEntity(table3);
     entityManager->addEntity(table4);
     entityManager->addEntity(table5);
-
-    // entityManager->addEntity(new Entity(190, 220, 50, 50, seatImg));    
-    // entityManager->addEntity(new Entity(150, 280, 50, 50, seatImg));    
-    // entityManager->addEntity(new Entity(190, 280, 50, 50, seatImg));    
-    //     entityManager->addEntity(new Entity(130, 200, 96, 117, tableImg));
-    // entityManager->addEntity(new Entity(380, 40, 96, 117, tableImg));
-    // entityManager->addEntity(new Entity(380, 200, 96, 117, tableImg));
-    // entityManager->addEntity(new Entity(600, 40, 96, 117, tableImg));
-    // entityManager->addEntity(new Entity(600, 200, 96, 117, tableImg));
 }
 
 void Restaurant::initClients(){
@@ -135,8 +126,14 @@ void Restaurant::render() {
     ofSetColor(256, 256, 256);
 }
 void Restaurant::serveClient(){
-    if(entityManager->firstClient!= nullptr){
+    // Check if the player has a burger with empty ingredients
+    if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
+        return;
+    }
+
+    if (player->getBurger()->equals(entityManager->firstClient->getBurger()) ){
         money += entityManager->firstClient->serve(player->getBurger());
+        player->getBurger()->clear();
     }
 }
 void Restaurant::keyPressed(int key) {

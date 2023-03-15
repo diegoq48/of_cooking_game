@@ -72,6 +72,9 @@ void Player::keyPressed(int key){
         }
         speed = 0;
     }
+    if(key == 'u'){
+        burger->removeIngredient();
+    }
 }
 BaseCounter* Player::getActiveCounter(){
     for(Entity* e:entityManager->entities){

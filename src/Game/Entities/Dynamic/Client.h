@@ -12,6 +12,7 @@ class Client: public Entity{
         void tick();
         void render();
         int serve(Burger*);
+        Burger* getBurger(){ return burger; }
         Client* nextClient=nullptr;
         bool isLeaving=false;
 

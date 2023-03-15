@@ -9,12 +9,18 @@ Burger::Burger(int x, int y, int width, int height){
     this->y = y;
     this->width = width;
     this->height = height;
+    
 }
 
 void Burger::addIngredient(Item *item) {
     ingredients.push_back(item);
 }
 
+void Burger::removeIngredient() {
+    if(!ingredients.empty()){
+    ingredients.pop_back();
+    }
+}
 void Burger::render(){
     int counter = 1;
     for (Item* ingredient:ingredients){
@@ -24,30 +30,31 @@ void Burger::render(){
 }
 
 void Burger::clear(){
-    ingredients.empty();
+    ingredients.clear();
 }
 
-// The function should should not care by the order of the ingredients except for the buns at the start and end
+// The function  should not care by the order of the ingredients except for the buns at the start and end
 bool Burger::equals(Burger *burger) {
-// check if the first element in ingredients is a bun
-    if (ingredients[0]->name != "bottomBun"){
+    // Check if the first element in ingredients is a bottom bun
+    if (ingredients[0]->name != "bottomBun") {
         return false;
     }
-    if (ingredients[ingredients.size()-1]->name != "topBun"){
+    if (ingredients[ingredients.size() - 1]->name != "topBun") {
         return false;
     }
-// check if all the ingredients in the burger are in the other burger
-    for (Item* ingredient:ingredients){
-        bool found = false;
-        for (Item* otherIngredient:burger->ingredients){
-            if (ingredient->name == otherIngredient->name){
-                found = true;
-                break;
-            }
-        }
-        if (!found){
-            return false;
-        }
+
+    // Count ingredients in the first burger, excluding buns
+    std::map<std::string, int> count1;
+    for (size_t i = 1; i < ingredients.size() - 1; i++) {
+        count1[ingredients[i]->name]++;
     }
-    return true;
+
+    // Count ingredients in the second burger, excluding buns
+    std::map<std::string, int> count2;
+    for (size_t i = 1; i < burger->ingredients.size() - 1; i++) {
+        count2[burger->ingredients[i]->name]++;
+    }
+
+    // Compare the counts of ingredients in both burgers
+    return count1 == count2;
 }
