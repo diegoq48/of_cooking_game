@@ -1,7 +1,5 @@
 #include "Entity.h"
 #include "Burger.h"
-#include "Restaurant.h"
-#include "ofMain.h"
 
 class Client: public Entity{
     private:
@@ -17,6 +15,7 @@ class Client: public Entity{
         Burger* getBurger(){ return burger; }
         Client* nextClient=nullptr;
         bool isLeaving=false;
+        bool isServed=false;
 
 
 

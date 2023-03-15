@@ -2,13 +2,16 @@
 
 #include "State.h"
 
-class MenuState : public State {
+class looseState : public State {
 private:
+	Restaurant *restaraunt;
 	ofTrueTypeFont font;
 
 public:
-	MenuState();
+	looseState();
+	void tick();
 	void render();
 	void keyPressed(int key);
 	void reset();
+	void mousePressed(int x, int y, int button);
 };

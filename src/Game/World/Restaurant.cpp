@@ -101,7 +101,19 @@ void Restaurant::tick() {
     }
     player->tick();
     entityManager->tick();
+    if(entityManager->leftClients == 10){
+        std::cout << "Lost" << std::endl;
+        lost = true;
+    }
+    if(entityManager->servedClients == 10){
+        std::cout << "Won" << std::endl;
+        won = true;
+    }
 
+}
+
+void Restaurant::setMoney(int money) {
+    Restaurant::money = money;
 }
 
 
@@ -121,7 +133,8 @@ void Restaurant::render() {
     entityManager->render();
     ofSetColor(0, 100, 0);
     ofDrawBitmapString("Money: " + to_string(money), ofGetWidth()/2, 10);
-    //ofDrawBitmapString("Lives: " + to_string(lives), ofGetWidth()/2, 30);)
+    ofDrawBitmapString("Lives: " + to_string(10-entityManager->leftClients), ofGetWidth()/2, 30);
+    ofDrawBitmapString("Served Clients: " + to_string(entityManager->servedClients) + "/10", ofGetWidth()/2, 50);
     ofSetColor(256, 256, 256);
 }
 void Restaurant::serveClient(){
@@ -144,10 +157,15 @@ void Restaurant::keyPressed(int key) {
     }
 }
 
-void leftClientSet(int number){
-    leftClient += number;
-}
-
-int leftClientGet(){
-    return leftClient;
+void Restaurant::reset(){
+    std::cout << "Reset" << std::endl;
+    entityManager->reset();
+    entityManager->leftClients = 0;
+    money = 0;
+    lost = false;
+    ticks = 0;
+    initCounters();
+    initDecoration();
+    initClients();
+    ///player->reset();
 }

@@ -18,11 +18,14 @@ class Restaurant {
         int ticks=0;
         std::vector<ofImage> people;
         int money =0;
-        int leftCustomers = 0;
+        
 //        int startTime = ofTime.getAsSeconds();
 
     public:
+        int leftCustomers = 0;
+        bool won = false;
         Restaurant();
+        bool lost = false;
         Player* getPlayer();
         void setPlayer(Player *player);
         Item* cheese;
@@ -41,6 +44,6 @@ class Restaurant {
         void tick();
         void render();
         void keyPressed(int key);
-        int leftClientGet();
-        void leftClientSet();
+        void setMoney(int newMoney);
+        void reset();
 };

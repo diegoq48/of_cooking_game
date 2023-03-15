@@ -4,8 +4,9 @@
 #include "Client.h"
 
 class EntityManager {
-
 public:
+	int leftClients = 0;
+	int servedClients = 0;
 	Client* firstClient;
 	void tick();
 	void render();
@@ -13,5 +14,7 @@ public:
 	void addClient(Client *c);
 	void removeLeavingClients();
 	std::vector<Entity*> entities;
+	void reset();
 
 };
+

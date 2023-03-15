@@ -5,6 +5,15 @@ GameState::GameState() {
 }
 void GameState::tick() {
 	restaurant->tick();
+	if(restaurant->lost){
+		setNextState("Loose");
+		setFinished(true);
+	}
+	if(restaurant->won){
+		setNextState("Win");
+		setFinished(true);
+	}
+	
 }
 void GameState::render() {
 	restaurant->render();

@@ -17,7 +17,17 @@ void EntityManager::removeLeavingClients(){
     Client* prevClient = nullptr;
     
     while(tempClient != nullptr){
-        if(tempClient->isLeaving){
+        if(tempClient->isLeaving || tempClient->isServed){
+            if (tempClient->isLeaving){
+                leftClients++;
+                std::cout << "Left clients: " << leftClients << std::endl;
+            }
+                else {
+                    servedClients++;
+                    std::cout << "Client served" << servedClients << std::endl;
+
+                }
+
             if(prevClient == nullptr){
                 firstClient = tempClient->nextClient;
                 delete tempClient;
@@ -59,4 +69,23 @@ void EntityManager::addClient(Client* c){
         }
         tempClient->nextClient = c;
     }
+}
+
+void EntityManager::reset(){
+   //delete all cleints and entities
+   std::cout << "Resetting EntityManager" << std::endl;
+   leftClients = 0;
+    for(unsigned int i=0; i<entities.size(); i++){
+        delete entities[i];
+    }
+    entities.clear();
+    Client* tempClient = firstClient;
+    Client* prevClient = nullptr;
+    while(tempClient != nullptr){
+        prevClient = tempClient;
+        tempClient = tempClient->nextClient;
+        delete prevClient;
+    }
+    firstClient = nullptr;
+    
 }

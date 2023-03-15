@@ -21,10 +21,7 @@ void Client::tick(){
     burger->setY(y);
     if(patience == 0){
         isLeaving = true;
-        restaraunt->leftClientSet(1);
-        if (restaraunt->getLeftClientSet() == 10) {
-            setNextState(new "looseState")
-        }
+
     }
     if(nextClient != nullptr){
         nextClient->tick();
@@ -32,6 +29,7 @@ void Client::tick(){
 }
 
 int Client::serve(Burger* burger){
-    isLeaving = true;
+    isServed = true;
     return 10;
 }
+

@@ -5,6 +5,9 @@ void ofApp::setup(){
 	//States
 	menuState = new MenuState();
 	gameState = new GameState();
+	LooseState = new looseState();
+	restaurant = new Restaurant();
+	WinState = new winState();
 	// Initial State
 	currentState = menuState;
 
@@ -23,14 +26,15 @@ void ofApp::update(){
 			if(currentState->getNextState() == "Menu"){
 				currentState = menuState;
 			}else if(currentState->getNextState() == "Game"){
+				restaurant->lost = false;
 				currentState = gameState;
 			}
 			else if(currentState->getNextState() == "Loose"){
-				currentState = looseState;
+				currentState = LooseState;
 			}
 			else if(currentState->getNextState() == "Win"){
-				currentState = winState;
-			}
+				currentState = WinState;
+			} 
 			currentState->reset();
 		}
 	}
