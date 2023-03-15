@@ -20,6 +20,7 @@ void Client::tick(){
     patience--;
     burger->setY(y);
     if(patience == 0){
+        
         isLeaving = true;
 
     }
@@ -32,4 +33,6 @@ int Client::serve(Burger* burger){
     isServed = true;
     return 10;
 }
+
+
 
