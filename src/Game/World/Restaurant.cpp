@@ -101,12 +101,12 @@ void Restaurant::tick() {
     }
     player->tick();
     entityManager->tick();
-    if(entityManager->leftClients == 10){
-        std::cout << "Lost" << std::endl;
+    if(entityManager->leftClients >= 10){
+        std::cout << "Lost" << entityManager->leftClients << std::endl;
         lost = true;
     }
-    if(entityManager->servedClients == 10){
-        std::cout << "Won" << std::endl;
+    if(entityManager->servedClients >= 10){
+        std::cout << "Won" << entityManager->servedClients << std::endl;
         won = true;
     }
 
@@ -160,6 +160,7 @@ void Restaurant::keyPressed(int key) {
 void Restaurant::reset(){
     std::cout << "Reset" << std::endl;
     entityManager->reset();
+    std::cout << entityManager->leftClients << std::endl;
     entityManager->leftClients = 0;
     money = 0;
     lost = false;

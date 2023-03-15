@@ -8,7 +8,7 @@ private:
 	ofTrueTypeFont font;
 
 public:
-	looseState();
+	looseState(Restaurant *res);
 	void tick();
 	void render();
 	void keyPressed(int key);

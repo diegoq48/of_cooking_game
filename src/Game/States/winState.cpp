@@ -1,8 +1,8 @@
 #include "winState.h"
 
-winState::winState() {
+winState::winState(Restaurant *res) {
 	font.load("sans-serif.ttf", 10);
-    restaraunt = new Restaurant();
+    restaraunt = res;
     ofSetColor(0);
 }
 void winState::tick() {

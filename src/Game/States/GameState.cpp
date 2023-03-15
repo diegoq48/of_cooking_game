@@ -1,7 +1,7 @@
 #include "GameState.h"
 
-GameState::GameState() {
-    this->restaurant = new Restaurant();
+GameState::GameState(Restaurant *res) {
+    this->restaurant = res;
 }
 void GameState::tick() {
 	restaurant->tick();

@@ -1,8 +1,8 @@
 #include "looseState.h"
 
-looseState::looseState() {
+looseState::looseState(Restaurant *res) {
 	font.load("sans-serif.ttf", 10);
-    restaraunt = new Restaurant();
+    restaraunt = res;
     ofSetColor(0);
 }
 void looseState::tick() {

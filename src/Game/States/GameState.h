@@ -3,7 +3,7 @@
 
 class GameState: public State{
     public: 
-        GameState();
+        GameState(Restaurant *res);
 		void reset();
 		void tick();
 		void render();

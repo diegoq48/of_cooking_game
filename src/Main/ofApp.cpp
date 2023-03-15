@@ -2,12 +2,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetWindowTitle("Java Game Box");
+	//Start Game Variables in restaurant
+	restaurant = new Restaurant();
 	//States
 	menuState = new MenuState();
-	gameState = new GameState();
-	LooseState = new looseState();
-	restaurant = new Restaurant();
-	WinState = new winState();
+	gameState = new GameState(restaurant);
+	LooseState = new looseState(restaurant);
+	WinState = new winState(restaurant);
 	// Initial State
 	currentState = menuState;
 
@@ -26,7 +27,6 @@ void ofApp::update(){
 			if(currentState->getNextState() == "Menu"){
 				currentState = menuState;
 			}else if(currentState->getNextState() == "Game"){
-				restaurant->lost = false;
 				currentState = gameState;
 			}
 			else if(currentState->getNextState() == "Loose"){

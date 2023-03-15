@@ -75,9 +75,6 @@ void EntityManager::reset(){
    //delete all cleints and entities
    std::cout << "Resetting EntityManager" << std::endl;
    leftClients = 0;
-    for(unsigned int i=0; i<entities.size(); i++){
-        delete entities[i];
-    }
     entities.clear();
     Client* tempClient = firstClient;
     Client* prevClient = nullptr;
