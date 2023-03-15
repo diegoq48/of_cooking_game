@@ -141,11 +141,13 @@ void Restaurant::keyPressed(int key) {
         case 's':
             serveClient();
             break;
-     /*    case OF_KEY_LEFT:
-            player->moveLeft();
-            break;
-        case OF_KEY_RIGHT:
-            player->moveRight();
-            break; */
     }
+}
+
+void leftClientSet(int number){
+    leftClient += number;
+}
+
+int leftClientGet(){
+    return leftClient;
 }

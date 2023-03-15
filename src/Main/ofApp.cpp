@@ -25,6 +25,12 @@ void ofApp::update(){
 			}else if(currentState->getNextState() == "Game"){
 				currentState = gameState;
 			}
+			else if(currentState->getNextState() == "Loose"){
+				currentState = looseState;
+			}
+			else if(currentState->getNextState() == "Win"){
+				currentState = winState;
+			}
 			currentState->reset();
 		}
 	}

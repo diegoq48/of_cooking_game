@@ -8,7 +8,6 @@ Client::~Client(){
 }
 void Client::render(){
     burger->render();
-    float patiencePercentage = (patience)/3600;
     ofSetColor (255,patience/10 ,patience/10);
     sprite.draw(x, y, width, height);
     ofSetColor (255,255,255);
@@ -22,6 +21,10 @@ void Client::tick(){
     burger->setY(y);
     if(patience == 0){
         isLeaving = true;
+        restaraunt->leftClientSet(1);
+        if (restaraunt->getLeftClientSet() == 10) {
+            setNextState(new "looseState")
+        }
     }
     if(nextClient != nullptr){
         nextClient->tick();
