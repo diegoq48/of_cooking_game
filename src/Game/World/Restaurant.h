@@ -19,6 +19,7 @@ class Restaurant {
         std::vector<ofImage> people;
         int money =0;
         
+        
 //        int startTime = ofTime.getAsSeconds();
 
     public:
@@ -43,6 +44,7 @@ class Restaurant {
         void serveClient();
         void tick();
         void render();
+
         void keyPressed(int key);
         void setMoney(int newMoney);
         void reset();

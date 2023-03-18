@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Entity.h"
-#include "Client.h"
+#include "inspector.h"
+//#include "Client.h"
+
 
 class EntityManager {
 public:

@@ -120,11 +120,16 @@ void Restaurant::setMoney(int money) {
 void Restaurant::generateClient(){
     Burger* b = new Burger(72, 100, 50, 25);
     b->addIngredient(botBread);
-    b->addIngredient(burger);
-    b->addIngredient(cheese);
-    b->addIngredient(tomato);
-    b->addIngredient(lettuce);
+    // add random ingredients to burger
+    Item* ingredients[4] = {cheese, lettuce, tomato, burger};
+    for (int i = 0; i < rand()%10 ; i++){
+        b->addIngredient(ingredients[rand()%3]);
+    }
     b->addIngredient(topBread);
+    if (this->ticks % 2000 == 0){
+        entityManager->addClient(new inspector(0, 50, 64, 72,ofImage("images/People/darthVader.png"), b));
+        return;
+    }
     entityManager->addClient(new Client(0, 50, 64, 72,people[ofRandom(8)], b));
 }
 void Restaurant::render() {
@@ -139,13 +144,17 @@ void Restaurant::render() {
 }
 void Restaurant::serveClient(){
     // Check if the player has a burger with empty ingredients
-    if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
+ /*    if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
         return;
     }
 
     if (player->getBurger()->equals(entityManager->firstClient->getBurger()) ){
         money += entityManager->firstClient->serve(player->getBurger());
         player->getBurger()->clear();
+    } */
+    if(entityManager->firstClient != nullptr){
+        money += entityManager->firstClient->serve(player->getBurger());
+
     }
 }
 void Restaurant::keyPressed(int key) {
@@ -153,6 +162,7 @@ void Restaurant::keyPressed(int key) {
     switch(key){
         case 's':
             serveClient();
+            player->getBurger()->clear();
             break;
     }
 }
