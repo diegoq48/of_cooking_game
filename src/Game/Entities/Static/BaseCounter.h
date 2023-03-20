@@ -4,16 +4,17 @@
 
 #pragma once
 
-#include "Item.h"
+// #include "Item.h"
 #include "Entity.h"
+#include "Ingredient.h"
 
 class BaseCounter: public Entity {
     private:
-        Item *item;
+        Ingredient *item;
 
     public:
-        BaseCounter(int x, int y, int width, int height, Item* item, ofImage sprite);
-        Item* getItem();
+        BaseCounter(int x, int y, int width, int height, Ingredient* item, ofImage sprite);
+        Ingredient* getItem();
         void showItem();
 
 };

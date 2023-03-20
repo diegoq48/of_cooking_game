@@ -50,7 +50,7 @@ void Player::keyPressed(int key){
         case 'e':
             BaseCounter* ac = getActiveCounter();
             if(ac != nullptr){
-                Item* item = ac->getItem();
+                Ingredient* item = ac->getItem();
                 if(item != nullptr){
                     burger->addIngredient(item);
                 }

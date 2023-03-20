@@ -29,12 +29,12 @@ void Restaurant::initItems(){
     botBreadImg.cropFrom(burgerSpriteSheet, 444, 270, 115, 39); // bottom bun
     plateImg.cropFrom(burgerSpriteSheet, 575, 263, 131, 51); // plate
 
-    cheese = new Item(cheeseImg, "cheese");
-    lettuce = new Item(lettuceImg, "lettuce");
-    tomato = new Item(tomatoImg, "tomato");
-    burger = new Item(burgerImg, "patty");
-    botBread = new Item(botBreadImg, "bottomBun");
-    topBread = new Item(topBreadImg, "topBun");
+    cheese = new Ingredient(cheeseImg, "cheese",3 );
+    lettuce = new Ingredient(lettuceImg, "lettuce", 2);
+    tomato = new Ingredient(tomatoImg, "tomato", 2);
+    burger = new Ingredient(burgerImg, "patty", 4);
+    botBread = new Ingredient(botBreadImg, "bottomBun", 1);
+    topBread = new Ingredient(topBreadImg, "topBun", 1);
 
 }
 void Restaurant::initCounters(){
@@ -113,12 +113,13 @@ void Restaurant::tick() {
 }
 
 void Restaurant::setMoney(int money) {
-    Restaurant::money = money;
+    this->money = money;
 }
 
 
 void Restaurant::generateClient(){
     Burger* b = new Burger(72, 100, 50, 25);
+<<<<<<< HEAD
     b->addIngredient(botBread);
     // add random ingredients to burger
     Item* ingredients[4] = {cheese, lettuce, tomato, burger};
@@ -130,6 +131,25 @@ void Restaurant::generateClient(){
         entityManager->addClient(new inspector(0, 50, 64, 72,ofImage("images/People/darthVader.png"), b));
         return;
     }
+=======
+
+    b->addIngredient(topBread);
+    
+    for(int i = 0; i < 3; i++){
+        int random = ofRandom(3);
+        if(random == 0){
+            b->addIngredient(cheese);
+        }
+        if(random == 1){
+            b->addIngredient(tomato);
+        }
+        if(random == 2){
+            b->addIngredient(lettuce);
+        }
+    }
+    b->addIngredient(botBread);
+
+>>>>>>> 68f7f62 (added new Ingredient class and refactor code)
     entityManager->addClient(new Client(0, 50, 64, 72,people[ofRandom(8)], b));
 }
 void Restaurant::render() {

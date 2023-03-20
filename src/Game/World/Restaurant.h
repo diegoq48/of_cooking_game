@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "ofMain.h"
 #include "Table.h"
+#include "Ingredient.h"
 
 
 
@@ -29,12 +30,12 @@ class Restaurant {
         bool lost = false;
         Player* getPlayer();
         void setPlayer(Player *player);
-        Item* cheese;
-        Item* lettuce;
-        Item* tomato;
-        Item* burger;
-        Item* botBread;
-        Item* topBread;
+        Ingredient* cheese;
+        Ingredient* lettuce;
+        Ingredient* tomato;
+        Ingredient* burger;
+        Ingredient* botBread;
+        Ingredient* topBread;
         ofImage floor;
         void initItems();
         void initCounters();

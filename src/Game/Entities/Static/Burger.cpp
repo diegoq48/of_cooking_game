@@ -12,7 +12,7 @@ Burger::Burger(int x, int y, int width, int height){
     
 }
 
-void Burger::addIngredient(Item *item) {
+void Burger::addIngredient(Ingredient *item) {
     ingredients.push_back(item);
 }
 
@@ -31,6 +31,13 @@ void Burger::render(){
 
 void Burger::clear(){
     ingredients.clear();
+}
+int Burger::getCost(){
+    int cost = 0;
+    for (Ingredient* ingredient:ingredients){
+        cost += ingredient->getCost();
+    }
+    return cost;
 }
 
 // The function  should not care by the order of the ingredients except for the buns at the start and end
