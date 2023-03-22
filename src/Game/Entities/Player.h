@@ -11,6 +11,7 @@ class Player: public Entity{
         Animation *chefAnim;
         Burger *burger;
         EntityManager* entityManager;
+        BaseCounter* priviousCounter = nullptr;
     public:
         Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em);
         void tick();

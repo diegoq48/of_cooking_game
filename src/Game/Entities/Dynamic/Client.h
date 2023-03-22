@@ -10,7 +10,7 @@ class Client: public Entity{
         virtual ~Client();
         void tick();
         void render();
-        virtual int serve(Burger*);
+        int serve(Burger*);
         Burger* getBurger(){ return burger; }
         Client* nextClient=nullptr;
         bool isLeaving=false;

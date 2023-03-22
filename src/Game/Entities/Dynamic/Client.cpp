@@ -34,14 +34,12 @@ int Client::serve(Burger* burger){
         isServed = true;
         return 10;
     }
-    else{
-        isLeaving = true;
-    }
     if(nextClient == nullptr){
         return 0;
     }
-    nextClient->serve(burger);
-    return 0;
+    else{
+        return nextClient->serve(burger);
+    }
 }
 
 

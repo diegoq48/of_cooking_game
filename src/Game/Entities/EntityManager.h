@@ -17,6 +17,7 @@ public:
 	void removeLeavingClients();
 	std::vector<Entity*> entities;
 	void reset();
+	bool isInspector(Client* client);
 
 };
 

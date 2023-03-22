@@ -15,10 +15,21 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
     chefAnimframes.push_back(temp);
     this->chefAnim = new Animation(50, chefAnimframes);
     this->entityManager = em;
+    this->priviousCounter = nullptr;
 }
 
 void Player::tick(){
     chefAnim->tick();
+    BaseCounter *ac = getActiveCounter();
+    if (ac != nullptr) {
+        if (priviousCounter != ac) {
+            speed = 0;
+            priviousCounter = ac;
+        }
+    }
+    else {
+        priviousCounter = nullptr;
+    }
     if(facing == "left"){
         x-=speed;
     }else if(facing == "right"){
@@ -29,6 +40,7 @@ void Player::tick(){
     }else if(x + width >= ofGetWidth()){
         facing = "left";
     }
+    
 }
 
 void Player::render(){
@@ -58,16 +70,18 @@ void Player::keyPressed(int key){
             break;
     }
     if(key == OF_KEY_LEFT){
+        speed = 50;
         facing = "left"; 
         return;
     }
     if(key == OF_KEY_RIGHT){
+        speed = 50;
         facing = "right";
         return;
     }
     if (key == OF_KEY_UP) {
         if (speed == 0){
-            speed = 5;
+            speed = 50;
             return;
         }
         speed = 0;

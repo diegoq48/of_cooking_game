@@ -119,37 +119,17 @@ void Restaurant::setMoney(int money) {
 
 void Restaurant::generateClient(){
     Burger* b = new Burger(72, 100, 50, 25);
-<<<<<<< HEAD
     b->addIngredient(botBread);
-    // add random ingredients to burger
-    Item* ingredients[4] = {cheese, lettuce, tomato, burger};
+    Ingredient* ingredientArray[4] = {cheese, lettuce, tomato, burger};
     for (int i = 0; i < rand()%10 ; i++){
-        b->addIngredient(ingredients[rand()%3]);
+        b->addIngredient(ingredientArray[rand()%3]);
     }
     b->addIngredient(topBread);
+
     if (this->ticks % 2000 == 0){
         entityManager->addClient(new inspector(0, 50, 64, 72,ofImage("images/People/darthVader.png"), b));
         return;
     }
-=======
-
-    b->addIngredient(topBread);
-    
-    for(int i = 0; i < 3; i++){
-        int random = ofRandom(3);
-        if(random == 0){
-            b->addIngredient(cheese);
-        }
-        if(random == 1){
-            b->addIngredient(tomato);
-        }
-        if(random == 2){
-            b->addIngredient(lettuce);
-        }
-    }
-    b->addIngredient(botBread);
-
->>>>>>> 68f7f62 (added new Ingredient class and refactor code)
     entityManager->addClient(new Client(0, 50, 64, 72,people[ofRandom(8)], b));
 }
 void Restaurant::render() {
@@ -163,17 +143,9 @@ void Restaurant::render() {
     ofSetColor(256, 256, 256);
 }
 void Restaurant::serveClient(){
-    // Check if the player has a burger with empty ingredients
- /*    if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
-        return;
-    }
-
-    if (player->getBurger()->equals(entityManager->firstClient->getBurger()) ){
-        money += entityManager->firstClient->serve(player->getBurger());
-        player->getBurger()->clear();
-    } */
     if(entityManager->firstClient != nullptr){
-        money += entityManager->firstClient->serve(player->getBurger());
+        int payment = entityManager->firstClient->serve(player->getBurger());
+        std::cout << "Payment: " << payment << std::endl;
 
     }
 }
