@@ -120,12 +120,12 @@ void Restaurant::setMoney(int money) {
 void Restaurant::generateClient(){
     Burger* b = new Burger(72, 100, 50, 25);
     b->addIngredient(botBread);
-    Ingredient* ingredientArray[4] = {cheese, lettuce, tomato, burger};
+    // add random ingredients to burger
+    Ingredient* ingredients[4] = {cheese, lettuce, tomato, burger};
     for (int i = 0; i < rand()%10 ; i++){
-        b->addIngredient(ingredientArray[rand()%3]);
+        b->addIngredient(ingredients[rand()%3]);
     }
     b->addIngredient(topBread);
-
     if (this->ticks % 2000 == 0){
         entityManager->addClient(new inspector(0, 50, 64, 72,ofImage("images/People/darthVader.png"), b));
         return;
@@ -143,11 +143,15 @@ void Restaurant::render() {
     ofSetColor(256, 256, 256);
 }
 void Restaurant::serveClient(){
-    if(entityManager->firstClient != nullptr){
-        int payment = entityManager->firstClient->serve(player->getBurger());
-        std::cout << "Payment: " << payment << std::endl;
-
+    // Check if the player has a burger with empty ingredients
+    if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
+        return;
     }
+
+    if (player->getBurger()->equals(entityManager->firstClient->getBurger()) ){
+        money += entityManager->firstClient->serve(player->getBurger());
+        player->getBurger()->clear();
+    } 
 }
 void Restaurant::keyPressed(int key) {
     player->keyPressed(key);
