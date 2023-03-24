@@ -16,12 +16,21 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
     this->chefAnim = new Animation(50, chefAnimframes);
     this->entityManager = em;
     this->priviousCounter = nullptr;
+    this->ingredientsToCook.push_back("patty");
 }
 
 void Player::tick(){
     chefAnim->tick();
     BaseCounter *ac = getActiveCounter();
+    // In this update function we want to check if the activecounter have getCanGrab() == false so that when
+    //the players activate is cooking of the counter it will start a progress bar tht will be a method in the counter
+    // class
+    // All counters that getCanGrab() == false are the ones that are cooking
+
     if (ac != nullptr) {
+            if(!ac->getCanGrab() ){
+                ac->tick();
+                }
         if (priviousCounter != ac) {
             speed = 0;
             priviousCounter = ac;
@@ -62,9 +71,26 @@ void Player::keyPressed(int key){
         case 'e':
             BaseCounter* ac = getActiveCounter();
             if(ac != nullptr){
-                Ingredient* item = ac->getItem();
-                if(item != nullptr){
-                    burger->addIngredient(item);
+                std::cout <<ac->getCanGrab() << "Stove?" << std::endl;   
+                // If the counter is not cooking then we want to set the is cooking to true so that the counter start 
+                if(!ac->getCanGrab()){
+                    if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
+                    std::cout << "cannot be grabbed and is Stove" << std::endl;
+                        sc->setIsCooking(true);
+                    }
+                }
+                // If the counter can be grabbed then we want to add the ingredient to the burger
+                else {
+                    Ingredient* item = ac->getItem();
+                    if(item != nullptr){
+                        burger->addIngredient(item);
+
+                        // If the counter is a stove counter then we want to set the can grab to false because the player
+                        // has already grabbed the cooked ingredient from the counter.
+                        if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
+                            sc->setCanGrab(false);
+                        }
+                    }
                 }
             }
             break;

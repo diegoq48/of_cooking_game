@@ -3,6 +3,7 @@
 #include "Burger.h"
 #include "EntityManager.h"
 #include "BaseCounter.h"
+#include "StoveCounter.h"
 class Player: public Entity{
 
     private:
@@ -12,6 +13,8 @@ class Player: public Entity{
         Burger *burger;
         EntityManager* entityManager;
         BaseCounter* priviousCounter = nullptr;
+        int ticks = 0;
+        vector<string> ingredientsToCook;
     public:
         Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em);
         void tick();

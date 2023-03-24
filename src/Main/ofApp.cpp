@@ -11,7 +11,8 @@ void ofApp::setup(){
 	WinState = new winState(restaurant);
 	// Initial State
 	currentState = menuState;
-
+	// start a global ofTimer
+	
 	// Sound
 	sound.load("music.wav");
 	sound.setLoop(true);

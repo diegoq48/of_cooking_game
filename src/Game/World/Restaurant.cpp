@@ -51,7 +51,7 @@ void Restaurant::initCounters(){
     breadCounterImg.cropFrom(counterSheet,0,63,34,56);//buns
     entityManager->addEntity(new BaseCounter(0,yOffset-16, counterWidth, 117, nullptr, plateCounterImg));
     entityManager->addEntity( new BaseCounter(counterWidth,yOffset-7, counterWidth,108, cheese, cheeseCounterImg));
-    entityManager->addEntity(new BaseCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg));
+    entityManager->addEntity(new StoveCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg, 800));
     entityManager->addEntity(new BaseCounter(counterWidth*3, yOffset, counterWidth, 102, lettuce, lettuceCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth*4,yOffset, counterWidth, 102, nullptr, emptyCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth*5, yOffset -10, counterWidth, 113, tomato, tomatoCounterImg));
@@ -143,7 +143,7 @@ void Restaurant::render() {
     ofSetColor(256, 256, 256);
 }
 void Restaurant::serveClient(){
-    // Check if the player has a burger with empty ingredients
+    //Check if the player has a burger with empty ingredients
     if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
         return;
     }
