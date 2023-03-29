@@ -25,7 +25,8 @@ void StoveCounter::drawCookingBar(){
     ofSetColor(0, 0, 0);
     ofDrawRectangle(x, y, width, height);
     ofSetColor(255, 25, 255);
-    ofDrawRectangle(x, y + 100, width * (cookTime / cookTimeMax), height);
+    // ofDrawRectangle(x + 100, y + 100, width * (cookTime / cookTimeMax), height);
+    ofDrawRectangle(x + 100, y + 100, width, height);
 }
 
 void StoveCounter::startCooking(){
@@ -42,10 +43,8 @@ void StoveCounter::startCooking(){
     if(isCooked){
     isCooking = false;
     cookTime = 0;
-    canGrab = true;
-    std::cout << "Cooking Done: " << canGrab<< std::endl;
-    
     isCooked = false;
+    std::cout << "Cooking Done: " << canGrab<< std::endl;
     }
 
 

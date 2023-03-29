@@ -15,6 +15,7 @@ class Player: public Entity{
         BaseCounter* priviousCounter = nullptr;
         int ticks = 0;
         vector<string> ingredientsToCook;
+        vector<StoveCounter*> stoves;
     public:
         Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em);
         void tick();

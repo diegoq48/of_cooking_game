@@ -17,20 +17,28 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
     this->entityManager = em;
     this->priviousCounter = nullptr;
     this->ingredientsToCook.push_back("patty");
+    // iterate thout the entitymanager entities and check if the entity is a stoveCounter
+    // if it is a stoveCounter then add the ingredients to the vector
+    // for (int i = 0; i < entityManager->entities.size(); i++) {
+    //     if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
+
+    //     }
+    // }
 }
 
 void Player::tick(){
     chefAnim->tick();
     BaseCounter *ac = getActiveCounter();
-    // In this update function we want to check if the activecounter have getCanGrab() == false so that when
-    //the players activate is cooking of the counter it will start a progress bar tht will be a method in the counter
-    // class
-    // All counters that getCanGrab() == false are the ones that are cooking
+
+
+    for (int i = 0; i < entityManager->entities.size(); i++) {
+    if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
+            sc->tick();
+        }
+    }
+    
 
     if (ac != nullptr) {
-            if(!ac->getCanGrab() ){
-                ac->tick();
-                }
         if (priviousCounter != ac) {
             speed = 0;
             priviousCounter = ac;
@@ -84,12 +92,6 @@ void Player::keyPressed(int key){
                     Ingredient* item = ac->getItem();
                     if(item != nullptr){
                         burger->addIngredient(item);
-
-                        // If the counter is a stove counter then we want to set the can grab to false because the player
-                        // has already grabbed the cooked ingredient from the counter.
-                        if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
-                            sc->setCanGrab(false);
-                        }
                     }
                 }
             }

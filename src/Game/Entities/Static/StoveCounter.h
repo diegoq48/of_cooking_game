@@ -20,7 +20,6 @@ public:
         this->cookTimeMax = cookTimeMax;
         cookTime = 0;
         cookTimeMax = 8000;
-        canGrab = false;
     }
     void startCooking();
 

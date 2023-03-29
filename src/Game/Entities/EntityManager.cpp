@@ -11,7 +11,6 @@ void EntityManager::tick(){
 }
 
 void EntityManager::removeLeavingClients(){
-
     // Remove all clients that are leaving
     Client* tempClient = firstClient;
     Client* prevClient = nullptr;

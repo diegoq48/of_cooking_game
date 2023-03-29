@@ -147,12 +147,10 @@ void Restaurant::serveClient(){
     if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
         return;
     }
-
-    if (player->getBurger()->equals(entityManager->firstClient->getBurger()) ){
-        money += entityManager->firstClient->serve(player->getBurger());
-        player->getBurger()->clear();
-    } 
+    money += entityManager->firstClient->serve(player->getBurger());
 }
+
+
 void Restaurant::keyPressed(int key) {
     player->keyPressed(key);
     switch(key){
