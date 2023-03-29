@@ -63,6 +63,10 @@ void Player::tick(){
 void Player::render(){
     BaseCounter *ac = getActiveCounter();
     if (ac != nullptr) {
+        //if counter is a stove then execute the showitem of that class
+        if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
+            sc->showItem();
+        }
         ac->showItem();
     }
     ofSetColor(256, 256, 256);
@@ -92,6 +96,11 @@ void Player::keyPressed(int key){
                     Ingredient* item = ac->getItem();
                     if(item != nullptr){
                         burger->addIngredient(item);
+                         // If the counter is a stove counter then we want to set the can grab to false because the player
+                        // has already grabbed the cooked ingredient from the counter.
+                        if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
+                            sc->setCanGrab(false);
+                        }
                     }
                 }
             }

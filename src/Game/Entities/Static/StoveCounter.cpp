@@ -21,12 +21,18 @@ void StoveCounter::setisCooked(bool sett) {
         this->isCooked = sett;
     }
 
-void StoveCounter::drawCookingBar(){
-    ofSetColor(0, 0, 0);
-    ofDrawRectangle(x, y, width, height);
-    ofSetColor(255, 25, 255);
-    // ofDrawRectangle(x + 100, y + 100, width * (cookTime / cookTimeMax), height);
-    ofDrawRectangle(x + 100, y + 100, width, height);
+
+void StoveCounter::showItem(){
+    // Draw the item grayed out if it is not cooked
+    if (!canGrab){
+        ofSetColor(100, 100, 100);
+        item->sprite.draw(x+width/2 -25, y-30, 50, 30);
+        ofSetColor(255, 255, 255);
+    }
+    else{
+        ofSetColor(255, 255, 255);
+        item->sprite.draw(x+width/2 -25, y-30, 50, 30);
+    }
 }
 
 void StoveCounter::startCooking(){
@@ -34,7 +40,6 @@ void StoveCounter::startCooking(){
     if(cookTime < cookTimeMax){
         cookTime++;
         std::cout << "Cooking== " <<cookTime << std::endl;
-        drawCookingBar();
     }
     else{
         isCooked = true;
@@ -44,6 +49,7 @@ void StoveCounter::startCooking(){
     isCooking = false;
     cookTime = 0;
     isCooked = false;
+    canGrab = true;
     std::cout << "Cooking Done: " << canGrab<< std::endl;
     }
 

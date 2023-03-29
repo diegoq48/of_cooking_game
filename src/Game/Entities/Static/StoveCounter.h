@@ -19,7 +19,8 @@ public:
     StoveCounter(int x, int y, int width, int height, Ingredient* item, ofImage sprite, int cookTimeMax) : BaseCounter(x, y, width, height, item, sprite) {
         this->cookTimeMax = cookTimeMax;
         cookTime = 0;
-        cookTimeMax = 8000;
+        cookTimeMax = 800;
+        canGrab = false;
     }
     void startCooking();
 
@@ -30,5 +31,6 @@ public:
     bool getIsCooking();
     void setisCooked(bool sett);
     bool getisCooked();
+    void showItem();
 
 };

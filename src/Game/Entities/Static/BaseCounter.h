@@ -9,15 +9,19 @@
 #include "Ingredient.h"
 
 class BaseCounter: public Entity {
-    private:
+    protected:
         Ingredient *item;
 
     public:
+        bool canGrab = true;
         BaseCounter(int x, int y, int width, int height, Ingredient* item, ofImage sprite);
         Ingredient* getItem();
-        void showItem();
+        virtual void showItem();
         bool getCanGrab() {
             return canGrab;
+        }
+        void setCanGrab(bool canGrab) {
+            this->canGrab = canGrab;
         }
 
 };
