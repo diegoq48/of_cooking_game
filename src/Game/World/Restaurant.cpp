@@ -96,7 +96,7 @@ void Restaurant::initClients(){
 }
 void Restaurant::tick() {
     ticks++;
-    if(ticks % 400 == 0){
+    if(ticks % 400 == 0 && entityManager->countClients() < 6){
         generateClient();
     }
     player->tick();

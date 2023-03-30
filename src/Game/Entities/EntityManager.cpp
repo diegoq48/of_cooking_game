@@ -88,3 +88,14 @@ void EntityManager::reset(){
     firstClient = nullptr;
     
 }
+
+int EntityManager::countClients(){
+    int count = 0;
+    Client* current = firstClient;
+    while (current != nullptr) {
+        count++;
+        current = current->nextClient;
+    }
+    return count;
+
+}

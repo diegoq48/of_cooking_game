@@ -18,6 +18,7 @@ public:
 	std::vector<Entity*> entities;
 	void reset();
 	bool isInspector(Client* client);
+	int countClients();
 
 };
 
