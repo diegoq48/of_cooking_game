@@ -35,7 +35,8 @@ void Player::tick(){
     if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
             sc->tick();
         }
-    }
+        }
+    
     
 
     if (ac != nullptr) {
@@ -61,9 +62,14 @@ void Player::tick(){
 }
 
 void Player::render(){
+    for (int i = 0; i < entityManager->entities.size(); i++) {
+    if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
+            sc->showItem();
+        }
+        }
     BaseCounter *ac = getActiveCounter();
     if (ac != nullptr) {
-        //if counter is a stove then execute the showitem of that class
+        // if counter is a stove then execute the showitem of that class
         if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
             sc->showItem();
         }

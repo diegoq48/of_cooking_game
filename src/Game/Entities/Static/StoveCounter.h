@@ -24,7 +24,7 @@ public:
     }
     void startCooking();
 
-    void drawCookingBar();
+    void drawProgressBar();
 
     void tick();
     void setIsCooking(bool sett);

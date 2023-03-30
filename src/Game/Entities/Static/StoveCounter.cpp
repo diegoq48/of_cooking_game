@@ -5,6 +5,7 @@ void StoveCounter::tick(){
     if (isCooking){
         std::cout <<" is Cooking" << std::endl;
         startCooking();
+        showItem();
     }
 }
 
@@ -25,7 +26,16 @@ void StoveCounter::setisCooked(bool sett) {
 void StoveCounter::showItem(){
     // Draw the item grayed out if it is not cooked
     if (!canGrab){
-        ofSetColor(100, 100, 100);
+        // create me a variable that get the percentage 
+        // of the cookTime and cookTimeMax
+        float cooktimeRatio = static_cast<float>(cookTime) / static_cast<float>(cookTimeMax);
+
+        // Interpolate color based on cooktime ratio
+        int r = static_cast<int>(100 + (255 - 100) * cooktimeRatio);
+        int g = static_cast<int>(100 + (255 - 100) * cooktimeRatio);
+        int b = static_cast<int>(100 + (255 - 100) * cooktimeRatio);
+
+        ofSetColor(r, g, b);
         item->sprite.draw(x+width/2 -25, y-30, 50, 30);
         ofSetColor(255, 255, 255);
     }
@@ -35,11 +45,21 @@ void StoveCounter::showItem(){
     }
 }
 
+void StoveCounter::drawProgressBar(){
+    // draw 10 pixels  more in the y axis a progress bar
+    // ofSetColor(255, 255, 255);
+    // ofDrawRectangle(x, y+height, width, 10);
+    ofSetColor(255, 0, 0);
+    ofDrawRectangle(x, y+20, 10000, 10);
+    ofSetColor(255, 255, 255);
+}
+
 void StoveCounter::startCooking(){
     //Start the cooling
     if(cookTime < cookTimeMax){
         cookTime++;
         std::cout << "Cooking== " <<cookTime << std::endl;
+        drawProgressBar();
     }
     else{
         isCooked = true;
