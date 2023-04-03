@@ -10,7 +10,7 @@ Restaurant::Restaurant() {
     entityManager = new EntityManager();
     ofImage chefPlayerImage;
     chefPlayerImage.load("images/chef.png");
-    this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager, this);    
+    this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager);    
     initItems();
     initCounters();
     initDecoration();
@@ -49,14 +49,14 @@ void Restaurant::initCounters(){
     cheeseCounterImg.cropFrom(counterSheet,64,73,32,46);//cheese
     plateCounterImg.cropFrom(counterSheet,0,133,32,50);//plates
     breadCounterImg.cropFrom(counterSheet,0,63,34,56);//buns
-    entityManager->addEntity(new BaseCounter(0,yOffset-16, counterWidth, 117, nullptr, plateCounterImg, 0));
-    entityManager->addEntity( new BaseCounter(counterWidth,yOffset-7, counterWidth,108, cheese, cheeseCounterImg, 1));
-//    entityManager->addEntity(new StoveCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg,4, 800));
-    entityManager->addEntity(new BaseCounter(counterWidth*3, yOffset, counterWidth, 102, lettuce, lettuceCounterImg, 2));
-    entityManager->addEntity(new BaseCounter(counterWidth*4,yOffset, counterWidth, 102, nullptr, emptyCounterImg, 0));
-    entityManager->addEntity(new BaseCounter(counterWidth*5, yOffset -10, counterWidth, 113, tomato, tomatoCounterImg,2));
-    entityManager->addEntity(new BaseCounter(counterWidth*6, yOffset-32, counterWidth, 133, botBread, breadCounterImg,2));
-    entityManager->addEntity(new BaseCounter(counterWidth*7, yOffset-32, counterWidth, 133, topBread, breadCounterImg,3));
+    entityManager->addEntity(new BaseCounter(0,yOffset-16, counterWidth, 117, nullptr, plateCounterImg));
+    entityManager->addEntity( new BaseCounter(counterWidth,yOffset-7, counterWidth,108, cheese, cheeseCounterImg));
+    entityManager->addEntity(new StoveCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg,800));
+    entityManager->addEntity(new BaseCounter(counterWidth*3, yOffset, counterWidth, 102, lettuce, lettuceCounterImg));
+    entityManager->addEntity(new BaseCounter(counterWidth*4,yOffset, counterWidth, 102, nullptr, emptyCounterImg));
+    entityManager->addEntity(new BaseCounter(counterWidth*5, yOffset -10, counterWidth, 113, tomato, tomatoCounterImg));
+    entityManager->addEntity(new BaseCounter(counterWidth*6, yOffset-32, counterWidth, 133, botBread, breadCounterImg));
+    entityManager->addEntity(new BaseCounter(counterWidth*7, yOffset-32, counterWidth, 133, topBread, breadCounterImg));
 }
 void Restaurant::initDecoration(){
     ofImage DecorationSheet, tableImg, seatImg;
@@ -105,19 +105,11 @@ void Restaurant::tick() {
         std::cout << "Lost" << entityManager->leftClients << std::endl;
         lost = true;
     }
-    if(this->money > 99){
+    if(player->getMoney() > 99){
         std::cout << "Won" << entityManager->servedClients << std::endl;
         won = true;
     }
-    if (entityManager->inspectorsThatLeft > inspectorsSubstracted){
-        inspectorsSubstracted++;
-        money = money * .5;
-    }
 
-}
-
-void Restaurant::setMoney(int money) {
-    this->money = money;
 }
 
 
@@ -141,7 +133,7 @@ void Restaurant::render() {
     player->render();
     entityManager->render();
     ofSetColor(0, 100, 0);
-    ofDrawBitmapString("Money: " + to_string(money), ofGetWidth()/2, 10);
+    ofDrawBitmapString("Money: " + to_string(player->getMoney()), ofGetWidth()/2, 10);
     ofDrawBitmapString("Lives: " + to_string(10-entityManager->leftClients), ofGetWidth()/2, 30);
     ofDrawBitmapString("Served Clients: " + to_string(entityManager->servedClients) + "/10", ofGetWidth()/2, 50);
     ofSetColor(256, 256, 256);
@@ -151,7 +143,9 @@ void Restaurant::serveClient(){
     if(player->getBurger()->getIngredients().size() == 0 || entityManager->firstClient == nullptr){
         return;
     }
-    money += entityManager->firstClient->serve(player->getBurger());
+    if(entityManager->firstClient != nullptr){
+        entityManager->firstClient->serve(player->getBurger());
+    }
 }
 
 
@@ -170,7 +164,7 @@ void Restaurant::reset(){
     entityManager->reset();
     std::cout << entityManager->leftClients << std::endl;
     entityManager->leftClients = 0;
-    money = 30;
+    player->setMoney(30);
     lost = false;
     ticks = 0;
     initCounters();
@@ -179,6 +173,3 @@ void Restaurant::reset(){
     ///player->reset();
 }
 
-int Restaurant::getMoney() {
-    return this->money;
-}

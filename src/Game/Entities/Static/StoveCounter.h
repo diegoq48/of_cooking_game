@@ -16,7 +16,7 @@ private:
 
 
 public:
-    StoveCounter(int x, int y, int width, int height, Ingredient* item, ofImage sprite, int cookTimeMax) : BaseCounter(x, y, width, height, item, sprite, costOfIngredient) {
+    StoveCounter(int x, int y, int width, int height, Ingredient* item, ofImage sprite, int cookTimeMax) : BaseCounter(x, y, width, height, item, sprite) {
         this->cookTimeMax = cookTimeMax;
         cookTime = 0;
         cookTimeMax = 800;

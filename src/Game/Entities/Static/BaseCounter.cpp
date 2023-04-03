@@ -4,7 +4,7 @@
 
 #include "BaseCounter.h"
 
-BaseCounter::BaseCounter(int x, int y, int width, int height,Ingredient* item, ofImage sprite, int costOfIngredient) : Entity(x, y, width, height, sprite){
+BaseCounter::BaseCounter(int x, int y, int width, int height,Ingredient* item, ofImage sprite) : Entity(x, y, width, height, sprite){
     this->item = item;
 }
 
