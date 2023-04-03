@@ -20,6 +20,15 @@ void GameState::render() {
 }
 
 void GameState::keyPressed(int key){
+	switch (key) {
+		case 'p':
+			setNextState("Menu");
+			setFinished(true);
+			break;
+		case 'r':
+			restaurant->reset();
+			break;
+	}
 	restaurant->keyPressed(key);
 }
 

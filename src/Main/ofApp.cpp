@@ -9,6 +9,7 @@ void ofApp::setup(){
 	gameState = new GameState(restaurant);
 	LooseState = new looseState(restaurant);
 	WinState = new winState(restaurant);
+	settingState = new SettingState(); 
 	// Initial State
 	currentState = menuState;
 	// start a global ofTimer
@@ -35,7 +36,10 @@ void ofApp::update(){
 			}
 			else if(currentState->getNextState() == "Win"){
 				currentState = WinState;
-			} 
+			}
+			else if(currentState->getNextState() == "Settings"){
+				currentState = settingState;
+			}
 			currentState->reset();
 		}
 	}

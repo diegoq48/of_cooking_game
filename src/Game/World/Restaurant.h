@@ -23,8 +23,7 @@ class Restaurant {
 //        int startTime = ofTime.getAsSeconds();
 
     public:
-        int money =30;
-        int leftCustomers = 0;
+       int leftCustomers = 0;
         bool won = false;
         Restaurant();
         bool lost = false;

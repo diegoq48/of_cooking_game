@@ -170,6 +170,6 @@ void Restaurant::reset(){
     initCounters();
     initDecoration();
     initClients();
-    ///player->reset();
+    player->reset();
 }
 

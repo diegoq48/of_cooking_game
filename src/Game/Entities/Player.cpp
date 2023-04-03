@@ -85,53 +85,41 @@ void Player::render(){
 }
 
 void Player::keyPressed(int key){
+    BaseCounter* ac = getActiveCounter();
     switch(key){
         case 'e':
-            BaseCounter* ac = getActiveCounter();
+                if(ac->getItem() == nullptr){return;}
                 if(ac != nullptr && ac->getItem()->getCost() <= this->money){
-                    std::cout <<ac->getCanGrab() << "Stove?" << std::endl;   
-                    // If the counter is not cooking then we want to set the is cooking to true so that the counter start 
                     if(!ac->getCanGrab()){
                         if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
-                        std::cout << "cannot be grabbed and is Stove" << std::endl;
+                            std::cout << "cannot be grabbed and is Stove" << std::endl;
                             sc->setIsCooking(true);
                         }
                     }
-                    // If the counter can be grabbed then we want to add the ingredient to the burger
                     else {
                         Ingredient* item = ac->getItem();
-                        this->money = this->money - ac->getItem()->getCost();
                         if(item != nullptr){
+                            this->money = this->money - ac->getItem()->getCost();
                             burger->addIngredient(item);
-                            // If the counter is a stove counter then we want to set the can grab to false because the player
-                            // has already grabbed the cooked ingredient from the counter.
                             if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
                                 sc->setCanGrab(false);
                         }
                     }
                 }
             }
-        break;
-    }
-    if(key == OF_KEY_LEFT){
-        speed = 50;
-        facing = "left"; 
-        return;
-    }
-    if(key == OF_KEY_RIGHT){
-        speed = 50;
-        facing = "right";
-        return;
-    }
-    if (key == OF_KEY_UP) {
-        if (speed == 0){
+        case(OF_KEY_LEFT):
+            facing = "left";
             speed = 50;
-            return;
-        }
-        speed = 0;
-    }
-    if(key == 'u'){
-        burger->removeIngredient();
+            break;
+        case(OF_KEY_RIGHT):
+            facing = "right";
+            speed = 50;
+            break;
+        case('u'):
+            burger->removeIngredient();
+            break;
+        default:
+            break;
     }
 }
 BaseCounter* Player::getActiveCounter(){
@@ -143,7 +131,10 @@ BaseCounter* Player::getActiveCounter(){
     }
     return nullptr;
 }
-
+void Player::reset(){
+    this->burger->clear();
+    money = 30;
+}
 void Player::keyReleased(int key) {
 }
 void Player::mousePressed(int x, int y, int button) {

@@ -28,6 +28,7 @@ class Player: public Entity{
         void setFacing(string);
         void clearBurger();
         BaseCounter* getActiveCounter();
+        void reset();
         Burger* getBurger(){ return burger;
         }
         int getMoney(){ return money; }

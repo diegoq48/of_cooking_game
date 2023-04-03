@@ -6,6 +6,7 @@
 #include "looseState.h"
 #include "Restaurant.h"
 #include "winState.h"
+#include "SettingState.h"
 
 class ofApp : public ofBaseApp{
 
@@ -16,7 +17,7 @@ private:
 	looseState *LooseState;
 	Restaurant *restaurant;
 	winState *WinState;
-	
+	SettingState *settingState;
 	ofSoundPlayer sound;
 
 
