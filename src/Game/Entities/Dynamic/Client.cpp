@@ -32,7 +32,7 @@ void Client::tick(){
 int Client::serve(Burger* burger){
     if (burger->equals(this->burger)){
         isServed = true;
-        return 10;
+        return this->burger->getCost();
     }
     if(nextClient == nullptr){
         return 0;

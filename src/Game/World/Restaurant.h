@@ -5,11 +5,10 @@
 
 #include "BaseCounter.h"
 #include "EntityManager.h"
-#include "Player.h"
 #include "ofMain.h"
 #include "Table.h"
 #include "Ingredient.h"
-
+#include "Player.h"
 
 
 class Restaurant {
@@ -18,13 +17,13 @@ class Restaurant {
         EntityManager* entityManager;
         int ticks=0;
         std::vector<ofImage> people;
-        int money =0;
         int seconds = 0;
-        
+        int inspectorsSubstracted = 0;
         
 //        int startTime = ofTime.getAsSeconds();
 
     public:
+        int money =30;
         int leftCustomers = 0;
         bool won = false;
         Restaurant();
@@ -46,7 +45,7 @@ class Restaurant {
         void serveClient();
         void tick();
         void render();
-
+        int getMoney();
         void keyPressed(int key);
         void setMoney(int newMoney);
         void reset();

@@ -11,10 +11,10 @@
 class BaseCounter: public Entity {
     protected:
         Ingredient *item;
-
+        int costOfIngredient;
     public:
         bool canGrab = true;
-        BaseCounter(int x, int y, int width, int height, Ingredient* item, ofImage sprite);
+        BaseCounter(int x, int y, int width, int height, Ingredient* item, ofImage sprite, int costOfIngredient);
         Ingredient* getItem();
         virtual void showItem();
         bool getCanGrab() {
@@ -22,6 +22,9 @@ class BaseCounter: public Entity {
         }
         void setCanGrab(bool canGrab) {
             this->canGrab = canGrab;
+        }
+        int getCostOfIngredient(){
+            return costOfIngredient;
         }
 
 };

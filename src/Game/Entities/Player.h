@@ -4,6 +4,8 @@
 #include "EntityManager.h"
 #include "BaseCounter.h"
 #include "StoveCounter.h"
+
+class Restaurant;
 class Player: public Entity{
 
     private:
@@ -14,10 +16,11 @@ class Player: public Entity{
         EntityManager* entityManager;
         BaseCounter* priviousCounter = nullptr;
         int ticks = 0;
+        Restaurant *restaurant;
         vector<string> ingredientsToCook;
         vector<StoveCounter*> stoves;
     public:
-        Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em);
+        Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em, Restaurant* restaurantPtr);
         void tick();
         void render();
         void keyPressed(int);

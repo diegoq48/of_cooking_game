@@ -20,9 +20,11 @@ void EntityManager::removeLeavingClients(){
             if (tempClient->isLeaving){
                 leftClients++;
                 std::cout << "Left clients: " << leftClients << std::endl;
-   /*              if (dynamic_cast<inspector*>(tempClient) != nullptr;){
-                    std::cout << "Inspector left" << std::endl;
-                } */
+                inspector* tempInspector = dynamic_cast<inspector*>(tempClient);
+                if (tempInspector != nullptr){
+                    inspectorsThatLeft++;
+                    std::cout << "Inspectors that left: " << inspectorsThatLeft << std::endl;
+                } 
             }
                 else {
                     servedClients++;

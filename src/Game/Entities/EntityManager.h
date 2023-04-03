@@ -7,6 +7,7 @@
 
 class EntityManager {
 public:
+	int inspectorsThatLeft = 0;
 	int leftClients = 0;
 	int servedClients = 0;
 	Client* firstClient;

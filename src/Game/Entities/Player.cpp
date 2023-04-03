@@ -1,9 +1,11 @@
 #include "Player.h"
+#include "Restaurant.h"
 
-Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em) : Entity(x, y, width, height, sprite){
+Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em, Restaurant* restaurantPtr) : Entity(x, y, width, height, sprite){
 
     vector<ofImage> chefAnimframes;
     ofImage temp;
+    this-> restaurant = restaurantPtr;
     this->burger = new Burger(ofGetWidth()-110, 100, 100, 50);
     temp.cropFrom(sprite, 30,3,66,120);
     chefAnimframes.push_back(temp);
@@ -88,29 +90,30 @@ void Player::keyPressed(int key){
     switch(key){
         case 'e':
             BaseCounter* ac = getActiveCounter();
-            if(ac != nullptr){
-                std::cout <<ac->getCanGrab() << "Stove?" << std::endl;   
-                // If the counter is not cooking then we want to set the is cooking to true so that the counter start 
-                if(!ac->getCanGrab()){
-                    if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
-                    std::cout << "cannot be grabbed and is Stove" << std::endl;
-                        sc->setIsCooking(true);
-                    }
-                }
-                // If the counter can be grabbed then we want to add the ingredient to the burger
-                else {
-                    Ingredient* item = ac->getItem();
-                    if(item != nullptr){
-                        burger->addIngredient(item);
-                         // If the counter is a stove counter then we want to set the can grab to false because the player
-                        // has already grabbed the cooked ingredient from the counter.
+                if(ac != nullptr && ac->getCostOfIngredient() <= restaurant->getMoney()){
+                    std::cout <<ac->getCanGrab() << "Stove?" << std::endl;   
+                    // If the counter is not cooking then we want to set the is cooking to true so that the counter start 
+                    if(!ac->getCanGrab()){
                         if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
-                            sc->setCanGrab(false);
+                        std::cout << "cannot be grabbed and is Stove" << std::endl;
+                            sc->setIsCooking(true);
+                        }
+                    }
+                    // If the counter can be grabbed then we want to add the ingredient to the burger
+                    else {
+                        Ingredient* item = ac->getItem();
+                        restaurant->setMoney(restaurant->getMoney() - ac->getCostOfIngredient());
+                        if(item != nullptr){
+                            burger->addIngredient(item);
+                            // If the counter is a stove counter then we want to set the can grab to false because the player
+                            // has already grabbed the cooked ingredient from the counter.
+                            if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
+                                sc->setCanGrab(false);
                         }
                     }
                 }
             }
-            break;
+        break;
     }
     if(key == OF_KEY_LEFT){
         speed = 50;

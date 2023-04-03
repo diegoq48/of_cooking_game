@@ -10,7 +10,7 @@ Restaurant::Restaurant() {
     entityManager = new EntityManager();
     ofImage chefPlayerImage;
     chefPlayerImage.load("images/chef.png");
-    this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager);    
+    this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager, this);    
     initItems();
     initCounters();
     initDecoration();
@@ -49,14 +49,14 @@ void Restaurant::initCounters(){
     cheeseCounterImg.cropFrom(counterSheet,64,73,32,46);//cheese
     plateCounterImg.cropFrom(counterSheet,0,133,32,50);//plates
     breadCounterImg.cropFrom(counterSheet,0,63,34,56);//buns
-    entityManager->addEntity(new BaseCounter(0,yOffset-16, counterWidth, 117, nullptr, plateCounterImg));
-    entityManager->addEntity( new BaseCounter(counterWidth,yOffset-7, counterWidth,108, cheese, cheeseCounterImg));
-    entityManager->addEntity(new StoveCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg, 800));
-    entityManager->addEntity(new BaseCounter(counterWidth*3, yOffset, counterWidth, 102, lettuce, lettuceCounterImg));
-    entityManager->addEntity(new BaseCounter(counterWidth*4,yOffset, counterWidth, 102, nullptr, emptyCounterImg));
-    entityManager->addEntity(new BaseCounter(counterWidth*5, yOffset -10, counterWidth, 113, tomato, tomatoCounterImg));
-    entityManager->addEntity(new BaseCounter(counterWidth*6, yOffset-32, counterWidth, 133, botBread, breadCounterImg));
-    entityManager->addEntity(new BaseCounter(counterWidth*7, yOffset-32, counterWidth, 133, topBread, breadCounterImg));
+    entityManager->addEntity(new BaseCounter(0,yOffset-16, counterWidth, 117, nullptr, plateCounterImg, 0));
+    entityManager->addEntity( new BaseCounter(counterWidth,yOffset-7, counterWidth,108, cheese, cheeseCounterImg, 1));
+//    entityManager->addEntity(new StoveCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg,4, 800));
+    entityManager->addEntity(new BaseCounter(counterWidth*3, yOffset, counterWidth, 102, lettuce, lettuceCounterImg, 2));
+    entityManager->addEntity(new BaseCounter(counterWidth*4,yOffset, counterWidth, 102, nullptr, emptyCounterImg, 0));
+    entityManager->addEntity(new BaseCounter(counterWidth*5, yOffset -10, counterWidth, 113, tomato, tomatoCounterImg,2));
+    entityManager->addEntity(new BaseCounter(counterWidth*6, yOffset-32, counterWidth, 133, botBread, breadCounterImg,2));
+    entityManager->addEntity(new BaseCounter(counterWidth*7, yOffset-32, counterWidth, 133, topBread, breadCounterImg,3));
 }
 void Restaurant::initDecoration(){
     ofImage DecorationSheet, tableImg, seatImg;
@@ -105,9 +105,13 @@ void Restaurant::tick() {
         std::cout << "Lost" << entityManager->leftClients << std::endl;
         lost = true;
     }
-    if(entityManager->servedClients >= 10){
+    if(this->money > 99){
         std::cout << "Won" << entityManager->servedClients << std::endl;
         won = true;
+    }
+    if (entityManager->inspectorsThatLeft > inspectorsSubstracted){
+        inspectorsSubstracted++;
+        money = money * .5;
     }
 
 }
@@ -123,7 +127,7 @@ void Restaurant::generateClient(){
     // add random ingredients to burger
     Ingredient* ingredients[4] = {cheese, lettuce, tomato, burger};
     for (int i = 0; i < rand()%10 ; i++){
-        b->addIngredient(ingredients[rand()%3]);
+        b->addIngredient(ingredients[rand()%4]);
     }
     b->addIngredient(topBread);
     if (this->ticks % 2000 == 0){
@@ -166,11 +170,15 @@ void Restaurant::reset(){
     entityManager->reset();
     std::cout << entityManager->leftClients << std::endl;
     entityManager->leftClients = 0;
-    money = 0;
+    money = 30;
     lost = false;
     ticks = 0;
     initCounters();
     initDecoration();
     initClients();
     ///player->reset();
+}
+
+int Restaurant::getMoney() {
+    return this->money;
 }
