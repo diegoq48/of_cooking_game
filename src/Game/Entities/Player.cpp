@@ -107,6 +107,7 @@ void Player::keyPressed(int key){
                     }
                 }
             }
+            break;
         case(OF_KEY_LEFT):
             facing = "left";
             speed = 50;
