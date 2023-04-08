@@ -51,7 +51,7 @@ void Restaurant::initCounters(){
     breadCounterImg.cropFrom(counterSheet,0,63,34,56);//buns
     entityManager->addEntity(new BaseCounter(0,yOffset-16, counterWidth, 117, nullptr, plateCounterImg));
     entityManager->addEntity( new BaseCounter(counterWidth,yOffset-7, counterWidth,108, cheese, cheeseCounterImg));
-    entityManager->addEntity(new StoveCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg,800));
+    entityManager->addEntity(new StoveCounter(counterWidth*2,yOffset, counterWidth, 102, burger, stoveCounterImg,400));
     entityManager->addEntity(new BaseCounter(counterWidth*3, yOffset, counterWidth, 102, lettuce, lettuceCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth*4,yOffset, counterWidth, 102, nullptr, emptyCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth*5, yOffset -10, counterWidth, 113, tomato, tomatoCounterImg));
@@ -144,7 +144,8 @@ void Restaurant::serveClient(){
         return;
     }
     if(entityManager->firstClient != nullptr){
-        entityManager->firstClient->serve(player->getBurger());
+        int earn_money = entityManager->firstClient->serve(player->getBurger());
+        player->setMoney(player->getMoney() + earn_money);
     }
 }
 

@@ -71,7 +71,11 @@ void StoveCounter::startCooking(){
     isCooked = false;
     canGrab = true;
     std::cout << "Cooking Done: " << canGrab<< std::endl;
+    playCookedSound();
     }
+}
 
-
+void StoveCounter::playCookedSound(){
+    // Play the cooked sound effect
+    cookedSound.play();
 }

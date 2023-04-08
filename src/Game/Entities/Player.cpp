@@ -99,7 +99,7 @@ void Player::keyPressed(int key){
                     else {
                         Ingredient* item = ac->getItem();
                         if(item != nullptr){
-                            this->money = this->money - ac->getItem()->getCost();
+                            this->money = this->money - 1;
                             burger->addIngredient(item);
                             if (StoveCounter* sc = dynamic_cast<StoveCounter*>(ac)) {
                                 sc->setCanGrab(false);
