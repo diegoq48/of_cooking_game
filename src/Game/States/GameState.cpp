@@ -28,6 +28,10 @@ void GameState::keyPressed(int key){
 		case 'r':
 			restaurant->reset();
 			break;
+		case '/':
+            setFinished(true);
+            setNextState("Settings");
+            break;
 	}
 	restaurant->keyPressed(key);
 }

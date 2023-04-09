@@ -96,7 +96,7 @@ void Restaurant::initClients(){
 }
 void Restaurant::tick() {
     ticks++;
-    if(ticks % 400 == 0 && entityManager->countClients() < 6){
+    if(ticks % spawnRate == 0 && entityManager->countClients() < 6){
         generateClient();
     }
     player->tick();
@@ -117,6 +117,7 @@ void Restaurant::generateClient(){
     Burger* b = new Burger(72, 100, 50, 25);
     b->addIngredient(botBread);
     // add random ingredients to burger
+    srand(time(NULL));
     Ingredient* ingredients[4] = {cheese, lettuce, tomato, burger};
     for (int i = 0; i < rand()%10 ; i++){
         b->addIngredient(ingredients[rand()%4]);
@@ -157,6 +158,7 @@ void Restaurant::keyPressed(int key) {
             serveClient();
             player->getBurger()->clear();
             break;
+        
     }
 }
 

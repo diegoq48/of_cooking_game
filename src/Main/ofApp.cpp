@@ -9,15 +9,13 @@ void ofApp::setup(){
 	gameState = new GameState(restaurant);
 	LooseState = new looseState(restaurant);
 	WinState = new winState(restaurant);
-	settingState = new SettingState(); 
+	settingState = new SettingState(restaurant); 
 	// Initial State
 	currentState = menuState;
 	// start a global ofTimer
 	
 	// Sound
-	sound.load("music.wav");
-	sound.setLoop(true);
-	sound.play();
+	
 
 }
 

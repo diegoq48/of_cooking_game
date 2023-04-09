@@ -19,6 +19,7 @@ class Restaurant {
         std::vector<ofImage> people;
         int seconds = 0;
         int inspectorsSubstracted = 0;
+        int spawnRate = 400;
         
 //        int startTime = ofTime.getAsSeconds();
 
@@ -48,4 +49,10 @@ class Restaurant {
         void keyPressed(int key);
         void setMoney(int newMoney);
         void reset();
+        void setSpawnRate(int newSpawnRate){
+            spawnRate = newSpawnRate;
+        }
+        int getSpawnRate(){
+            return spawnRate;
+        }
 };

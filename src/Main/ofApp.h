@@ -18,13 +18,14 @@ private:
 	Restaurant *restaurant;
 	winState *WinState;
 	SettingState *settingState;
-	ofSoundPlayer sound;
 
 
 public:
 		void setup();
 		void update();
 		void draw();
+		void setVolume(float volume);
+		float getVolume();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
