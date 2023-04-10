@@ -109,6 +109,10 @@ void Restaurant::tick() {
         std::cout << "Won" << entityManager->servedClients << std::endl;
         won = true;
     }
+    if(entityManager->inspectorsThatLeft > inspectorsSubstracted ){
+        player->setMoney(player->getMoney()/2);
+        inspectorsSubstracted++;
+    }
 
 }
 
@@ -133,7 +137,7 @@ void Restaurant::render() {
     floor.draw(0,0, ofGetWidth(), ofGetHeight());
     player->render();
     entityManager->render();
-    ofSetColor(0, 100, 0);
+    ofSetColor(255, 0, 0);
     ofDrawBitmapString("Money: " + to_string(player->getMoney()), ofGetWidth()/2, 10);
     ofDrawBitmapString("Lives: " + to_string(10-entityManager->leftClients), ofGetWidth()/2, 30);
     ofDrawBitmapString("Served Clients: " + to_string(entityManager->servedClients) + "/10", ofGetWidth()/2, 50);
