@@ -3,6 +3,10 @@
 #include "ofMain.h"
 #include "MenuState.h"
 #include "GameState.h"
+#include "looseState.h"
+#include "Restaurant.h"
+#include "winState.h"
+#include "SettingState.h"
 
 class ofApp : public ofBaseApp{
 
@@ -10,14 +14,18 @@ private:
 	State *currentState;
 	MenuState *menuState;
 	GameState *gameState;
-	
-	ofSoundPlayer sound;
+	looseState *LooseState;
+	Restaurant *restaurant;
+	winState *WinState;
+	SettingState *settingState;
 
 
 public:
 		void setup();
 		void update();
 		void draw();
+		void setVolume(float volume);
+		float getVolume();
 
 		void keyPressed(int key);
 		void keyReleased(int key);

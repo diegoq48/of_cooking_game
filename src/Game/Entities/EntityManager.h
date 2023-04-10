@@ -1,11 +1,15 @@
 #pragma once
 
 #include "Entity.h"
-#include "Client.h"
+#include "inspector.h"
+//#include "Client.h"
+
 
 class EntityManager {
-
 public:
+	int inspectorsThatLeft = 0;
+	int leftClients = 0;
+	int servedClients = 0;
 	Client* firstClient;
 	void tick();
 	void render();
@@ -13,5 +17,9 @@ public:
 	void addClient(Client *c);
 	void removeLeavingClients();
 	std::vector<Entity*> entities;
+	void reset();
+	bool isInspector(Client* client);
+	int countClients();
 
 };
+

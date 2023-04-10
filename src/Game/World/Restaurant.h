@@ -5,8 +5,11 @@
 
 #include "BaseCounter.h"
 #include "EntityManager.h"
-#include "Player.h"
 #include "ofMain.h"
+#include "Table.h"
+#include "Ingredient.h"
+#include "Player.h"
+
 
 class Restaurant {
     private:
@@ -14,25 +17,42 @@ class Restaurant {
         EntityManager* entityManager;
         int ticks=0;
         std::vector<ofImage> people;
-        int money =0;
+        int seconds = 0;
+        int inspectorsSubstracted = 0;
+        int spawnRate = 400;
+        
+//        int startTime = ofTime.getAsSeconds();
 
     public:
+       int leftCustomers = 0;
+        bool won = false;
         Restaurant();
+        bool lost = false;
         Player* getPlayer();
         void setPlayer(Player *player);
-        Item* cheese;
-        Item* lettuce;
-        Item* tomato;
-        Item* burger;
-        Item* botBread;
-        Item* topBread;
+        Ingredient* cheese;
+        Ingredient* lettuce;
+        Ingredient* tomato;
+        Ingredient* burger;
+        Ingredient* botBread;
+        Ingredient* topBread;
         ofImage floor;
         void initItems();
         void initCounters();
+        void initDecoration();
         void initClients();
         void generateClient();
         void serveClient();
         void tick();
         void render();
+        int getMoney();
         void keyPressed(int key);
+        void setMoney(int newMoney);
+        void reset();
+        void setSpawnRate(int newSpawnRate){
+            spawnRate = newSpawnRate;
+        }
+        int getSpawnRate(){
+            return spawnRate;
+        }
 };

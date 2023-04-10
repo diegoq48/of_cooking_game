@@ -2,16 +2,20 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetWindowTitle("Java Game Box");
+	//Start Game Variables in restaurant
+	restaurant = new Restaurant();
 	//States
 	menuState = new MenuState();
-	gameState = new GameState();
+	gameState = new GameState(restaurant);
+	LooseState = new looseState(restaurant);
+	WinState = new winState(restaurant);
+	settingState = new SettingState(restaurant); 
 	// Initial State
 	currentState = menuState;
-
+	// start a global ofTimer
+	
 	// Sound
-	sound.load("music.wav");
-	sound.setLoop(true);
-	sound.play();
+	
 
 }
 
@@ -24,6 +28,15 @@ void ofApp::update(){
 				currentState = menuState;
 			}else if(currentState->getNextState() == "Game"){
 				currentState = gameState;
+			}
+			else if(currentState->getNextState() == "Loose"){
+				currentState = LooseState;
+			}
+			else if(currentState->getNextState() == "Win"){
+				currentState = WinState;
+			}
+			else if(currentState->getNextState() == "Settings"){
+				currentState = settingState;
 			}
 			currentState->reset();
 		}

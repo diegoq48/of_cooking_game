@@ -7,6 +7,8 @@ class MenuState : public State {
 private:
 	ofImage img1;
 	Button *startButton;
+	Button *exitButton;
+	ofTrueTypeFont font;
 
 public:
 	MenuState();

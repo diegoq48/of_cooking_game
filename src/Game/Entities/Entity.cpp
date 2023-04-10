@@ -1,5 +1,5 @@
 #include "Entity.h"
-
+//Boilerplate code for the entities in the game 
 Entity::Entity(int x, int y, int width, int height, ofImage sprite){
     this->x = x;
     this->y = y;
