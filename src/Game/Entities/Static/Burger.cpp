@@ -1,7 +1,4 @@
-//
-// Created by joshu on 11/4/2020.
-//
-
+// boilerplate for the burger 
 #include "Burger.h"
 
 Burger::Burger(int x, int y, int width, int height){

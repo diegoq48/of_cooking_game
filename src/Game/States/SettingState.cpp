@@ -1,16 +1,18 @@
 #include "SettingState.h"
+
+// gets all the songs in the audioFiles folder folder abs path is /bin/data/audioFiles only provide to audioFiles name to avoid incompatible fs errors on windows and mac and linux
 void SettingState::getSongs(){
     ofDirectory dir = ofDirectory("audioFiles"); 
     for (auto file : dir.getFiles()){
         std::string ext = file.getExtension();
+        // only add mp3, wav, ogg, and flac files could be done recursivly if necessary
         if (ext == "mp3" || ext == "wav" || ext == "ogg" || ext == "flac" ){
             songs.push_back(file);
         }
     }
-    
-
 }
 
+// constructor uses the restaurant pointer to get the spawn rate and others 
 SettingState::SettingState(Restaurant *res) {
     getSongs();
     this->restaurant = res;
@@ -27,11 +29,13 @@ SettingState::SettingState(Restaurant *res) {
 
 void SettingState::tick() {
     ticks++;
+    // updates the optionsResults
     optionsResults[0] = "1 Customer every " + to_string(restaurant->getSpawnRate()/100) + " seconds";
     optionsResults[1] = to_string((int)(sound.getVolume()*100))+"%";
     optionsResults[2] = songs[activeSong].getFileName();
 }
 
+// equivalent to draw 
 void SettingState::render() {
     img1.draw(0,0,ofGetWidth(),ofGetHeight());
 
@@ -49,6 +53,8 @@ void SettingState::render() {
     font.drawString("Use the left and right arrow keys to change the setting", 100, 600);
 }
 
+
+// uses to arrow keys to change the settings and g to go back to the game 
 void SettingState::keyPressed(int key) {
     switch (key){
         case OF_KEY_UP:
@@ -112,6 +118,7 @@ void SettingState::keyPressed(int key) {
     }
 }
 
+// plays the active song 
 void SettingState::playActiveSong(){
     sound.stop();
     sound.load(songs[activeSong]);

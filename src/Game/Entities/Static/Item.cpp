@@ -1,6 +1,4 @@
-//
-// Created by joshu on 11/4/2020.
-//
+// Boilerplate for the items in the game 
 
 #include "Item.h"
 

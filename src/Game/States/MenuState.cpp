@@ -1,5 +1,6 @@
 #include "MenuState.h"
 
+// Menu constructor uses buttons OH the humanity 
 MenuState::MenuState() {
 	string text = "Start";
 	font.load("sans-serif.ttf", 20);
@@ -20,6 +21,7 @@ void MenuState::tick() {
 	
 
 }
+// Equivalent to the draw function in the  ofApp class
 void MenuState::render() {
 	ofSetBackgroundColor(230, 230, 250);
 	startButton->render();
@@ -35,6 +37,7 @@ void MenuState::render() {
 	font.drawString("Press '/' to go to settings", ofGetWidth() / 2, ofGetHeight() / 2 + 200);
 }
 
+// uses s to start the game and q to quit the game and '/' to go to the settings menu
 void MenuState::keyPressed(int key){
 	switch(key) { 
 		case 's':

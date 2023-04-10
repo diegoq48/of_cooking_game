@@ -1,12 +1,16 @@
 #include "looseState.h"
 
+// constructor
 looseState::looseState(Restaurant *res) {
 	font.load("sans-serif.ttf", 10);
     restaraunt = res;
     ofSetColor(0);
 }
+
 void looseState::tick() {
 }
+
+// Equivalent to the draw function in the  ofApp class
 void looseState::render() {
 	ofSetBackgroundColor(230, 230, 250);
     ofSetColor(0,0,0);
@@ -16,7 +20,7 @@ void looseState::render() {
     font.drawString("Press q to quit", ofGetWidth() / 2, ofGetHeight() / 2 + 180);
 }
 
-
+// uses r to restart the and q to quit the game
 void looseState::keyPressed(int key){
 	switch(key){
         case 'r':

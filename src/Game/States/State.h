@@ -1,9 +1,13 @@
 #pragma once
 
+/* This file is the base class called state which dictates what the program should be doing */
+
 #include "ofMain.h"
-//#include "ofApp.h"
 #include "Restaurant.h"
 
+
+// large chuncks of the code are just rehashes of the ofBaseApp functions
+// if finished is true, the state will be changed to the next state
 class State {
 	public:
 		State() {}

@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+// Manages all of the entities in the game and updates them
 
 void EntityManager::tick(){
     for(unsigned int i=0; i<entities.size(); i++){
@@ -47,6 +48,8 @@ void EntityManager::removeLeavingClients(){
         }
     }
 }
+
+// Equivilent to the draw function in ofApp
 void EntityManager::render(){
     for(unsigned int i=0; i<entities.size(); i++){
         entities[i]->render();
@@ -55,11 +58,13 @@ void EntityManager::render(){
         firstClient->render();
     }
 }
-
+// Adds an entity to the list of all global entities in the game
 void EntityManager::addEntity(Entity *e){
     entities.push_back(e);
 }
 
+
+// adds a client to the list of clients a linked list 
 void EntityManager::addClient(Client* c){
     if(firstClient == nullptr){
         firstClient = c;
@@ -90,7 +95,7 @@ void EntityManager::reset(){
     firstClient = nullptr;
     
 }
-
+// returns the number of clients in the linked list
 int EntityManager::countClients(){
     int count = 0;
     Client* current = firstClient;

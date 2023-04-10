@@ -1,5 +1,6 @@
 #include "Client.h"
 
+//boilerplate code for the clients in the game
 Client::Client(int x, int y, int width, int height, ofImage sprite, Burger* burger): Entity(x, y, width, height, sprite){
     this->burger = burger;
 }
@@ -32,7 +33,7 @@ void Client::tick(){
 int Client::serve(Burger* burger){
     if (burger->equals(this->burger)){
         isServed = true;
-        return this->burger->getCost();
+        return this->burger->getCost()*3;
     }
     if(nextClient == nullptr){
         return 0;

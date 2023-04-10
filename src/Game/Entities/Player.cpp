@@ -1,5 +1,5 @@
 #include "Player.h"
-
+// constructor
 Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManager* em) : Entity(x, y, width, height, sprite){
 
     vector<ofImage> chefAnimframes;
@@ -17,15 +17,11 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
     this->entityManager = em;
     this->priviousCounter = nullptr;
     this->ingredientsToCook.push_back("patty");
-    // iterate thout the entitymanager entities and check if the entity is a stoveCounter
-    // if it is a stoveCounter then add the ingredients to the vector
-    // for (int i = 0; i < entityManager->entities.size(); i++) {
-    //     if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
 
-    //     }
-    // }
 }
 
+// checks if the player has lost or won and if so changes the state to the win or loose state
+// also checks for the counter that the player is on  also verifies if player is at the edge of the screen and changes the direction to the opposite direction 
 void Player::tick(){
     chefAnim->tick();
     BaseCounter *ac = getActiveCounter();
@@ -61,6 +57,7 @@ void Player::tick(){
     
 }
 
+//Equivilent to the draw function in ofApp
 void Player::render(){
     for (int i = 0; i < entityManager->entities.size(); i++) {
     if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
@@ -87,6 +84,7 @@ void Player::render(){
 void Player::keyPressed(int key){
     BaseCounter* ac = getActiveCounter();
     switch(key){
+        // adds the ingredient of the counter to the burger 
         case 'e':
                 if(ac->getItem() == nullptr){return;}
                 if(ac != nullptr && ac->getItem()->getCost() <= this->money){
@@ -108,14 +106,17 @@ void Player::keyPressed(int key){
                 }
             }
             break;
+        //changes the direction of the player to the left
         case(OF_KEY_LEFT):
             facing = "left";
             speed = 50;
             break;
+        //changes the direction of the player to the right
         case(OF_KEY_RIGHT):
             facing = "right";
             speed = 50;
             break;
+        // removes the last ingredient from the burger
         case('u'):
             burger->removeIngredient();
             break;
@@ -123,6 +124,7 @@ void Player::keyPressed(int key){
             break;
     }
 }
+// checks if the player is on a counter and returns the counter
 BaseCounter* Player::getActiveCounter(){
     for(Entity* e:entityManager->entities){
         BaseCounter* c = dynamic_cast<BaseCounter*>(e);
