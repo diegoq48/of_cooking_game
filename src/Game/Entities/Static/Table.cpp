@@ -14,7 +14,7 @@ Table::Table(int x, int y, int width, int height, int seatNumber,  ofImage seatS
 // draws the table and the chairs 
 void Table::render(){
     ofSetColor (255,255,255);
-    for (int i = 0; i < seats.size(); i++){
+    for (long unsigned int i = 0; i < seats.size(); i++){
         seats[i]->render();
      }
      tableSprite.draw(x, y, width, height);

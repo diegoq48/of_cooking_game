@@ -27,7 +27,7 @@ void Player::tick(){
     BaseCounter *ac = getActiveCounter();
 
 
-    for (int i = 0; i < entityManager->entities.size(); i++) {
+    for (int i = 0; i < (int)entityManager->entities.size(); i++) {
     if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
             sc->tick();
         }
@@ -59,7 +59,7 @@ void Player::tick(){
 
 //Equivilent to the draw function in ofApp
 void Player::render(){
-    for (int i = 0; i < entityManager->entities.size(); i++) {
+    for (int i = 0; i < (int)entityManager->entities.size(); i++) {
     if (StoveCounter* sc = dynamic_cast<StoveCounter*>(entityManager->entities[i])) {
             sc->showItem();
         }

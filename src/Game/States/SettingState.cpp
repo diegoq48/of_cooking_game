@@ -91,7 +91,7 @@ void SettingState::keyPressed(int key) {
         case OF_KEY_RIGHT:
             switch (selectedSetting){
                 case 2:
-                    if (activeSong == songs.size() - 1){
+                    if (activeSong == (int)songs.size() - 1){
                         activeSong = 0;
                         playActiveSong();
                     } else {
